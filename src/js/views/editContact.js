@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router";
 
@@ -15,7 +15,7 @@ export const EditContact = ({ closeModal }) => {
     useEffect(() => {
         const contactToEdit = store.contacts.find(contact => contact.id === store.selected_id);
         setContactEdit(contactToEdit);
-    }, [store.contacts, store.selected_id]); 
+    }, [store.contacts, store.selected_id]);
 
     useEffect(() => {
         if (contactEdit) {

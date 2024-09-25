@@ -8,7 +8,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Home from "./views/home";
+import Contacts from "./views/contacts";
 import AddContact from "./views/addContact";
 import EditContact from "./views/editContact";
 
@@ -24,7 +24,7 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<Home />} />
+						<Route path="/" element={<Contacts />} />
 						<Route path="/edit-contact" element={<EditContact/>} />
 						<Route path="/add-contact" element={<AddContact/>} />
 						<Route path="/demo" element={<Demo />} />

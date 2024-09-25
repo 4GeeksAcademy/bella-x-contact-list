@@ -3,32 +3,31 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import ContactCard from '../component/contactCard';
 
-export const Home = () => {
+export const Contacts = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
 
     useEffect(() => {
         actions.createAgenda();
-        actions.getContacts();  
-       
+        actions.getContacts();
+
     }, []);
 
-      return (
+    return (
         <div className="container">
             <div className="d-flex justify-content-between my-4"></div>
             <div className="row">
-                
-                 {store.contacts.map((contact) => (
-                    
-                        <ContactCard
-                            contact={contact}
-                            
-                        />
-                    
+
+                {store.contacts.map((contact) => (
+
+                    <ContactCard
+                        contact={contact}
+
+                    />
                 ))}
             </div>
         </div>
     );
 };
 
-export default Home;
+export default Contacts;
