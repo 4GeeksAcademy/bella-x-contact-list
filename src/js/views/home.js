@@ -1,15 +1,42 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Context } from '../store/appContext';
+import ContactCard from '../component/contactCard';
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+export const Home = () => {
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        actions.createAgenda();
+        actions.getContacts();  
+       
+
+    }, []);
+
+    const handleDelete = async (contactId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this contact?");
+        if (confirmDelete) {
+            await actions.deleteContact(contactId);
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="d-flex justify-content-between my-4"></div>
+            <div className="row">
+                
+                 {store.contacts.map((contact) => (
+                    
+                        <ContactCard
+                            contact={contact}
+                            
+                        />
+                    
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default Home;
