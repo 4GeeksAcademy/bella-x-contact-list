@@ -5,22 +5,21 @@ import { EditContact } from '../views/editContact';
 
 export const ContactCard = ({ contact }) => {
     const { actions } = useContext(Context);
-    const [showModal, setShowModal] = useState(false);
-    
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     const handleEdit = (id) => {
         actions.selectedId(id);
-        setShowModal(true);
+        setShowEditModal(true);
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
     };
 
-    const handleDelete = async (contactId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this contact?");
-        if (confirmDelete) {
-            await actions.deleteContact(contactId);
-        }
+    const handleDeleteConfirm = async () => {
+        await actions.deleteContact(contact.id);
+        setShowDeleteModal(false);
     };
 
     return (
@@ -44,7 +43,7 @@ export const ContactCard = ({ contact }) => {
                             <button className="btn btn-primary" onClick={() => handleEdit(contact.id)}>
                                 <i className="fas fa-edit"></i> Edit
                             </button>
-                            <button className="btn btn-danger" onClick={() => handleDelete(contact.id)}>
+                            <button className="btn btn-danger" onClick={() => setShowDeleteModal(true)}>
                                 <i className="fas fa-trash-alt"></i> Delete
                             </button>
                         </div>
@@ -52,7 +51,7 @@ export const ContactCard = ({ contact }) => {
                 </div>
             </div>
 
-            {showModal && (
+            {showEditModal && (
                 <div className="modal show d-block" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -62,13 +61,44 @@ export const ContactCard = ({ contact }) => {
                                     type="button"
                                     className="close"
                                     aria-label="Close"
-                                    onClick={handleCloseModal}
+                                    onClick={handleCloseEditModal}
                                 >
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <EditContact closeModal={handleCloseModal} />
+                                <EditContact closeModal={handleCloseEditModal} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showDeleteModal && (
+                <div className="modal show d-block" tabIndex="-1" role="dialog">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Confirm Deletion</h5>
+                                <button
+                                    type="button"
+                                    className="close"
+                                    aria-label="Close"
+                                    onClick={() => setShowDeleteModal(false)}
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Are you sure you want to delete this contact?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>
+                                    Cancel
+                                </button>
+                                <button type="button" className="btn btn-danger" onClick={handleDeleteConfirm}>
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>

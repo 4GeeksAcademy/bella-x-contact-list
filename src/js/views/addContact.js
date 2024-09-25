@@ -18,14 +18,14 @@ export const AddContact = ({ closeModal }) => {
       address: address,
     };
     actions.addContact(newContact);
-    closeModal(); 
+    closeModal();
     navigate("/");
   };
 
   return (
     <div>
-      <form 
-        onSubmit={handleSubmit} 
+      <form
+        onSubmit={handleSubmit}
         className="p-4 bg-white rounded shadow"
         style={{ width: "100%" }}
       >

@@ -22,8 +22,8 @@ export const Contacts = () => {
 
                     <ContactCard
                         contact={contact}
-
                     />
+                    
                 ))}
             </div>
         </div>

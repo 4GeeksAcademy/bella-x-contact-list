@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     if (response.ok) {
-                        await getActions().getContacts(); 
+                        await getActions().getContacts();
                     } else {
                         console.error("Failed to add contact:", response.statusText);
                     }
@@ -77,7 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     if (response.ok) {
-                        await getActions().getContacts();  
+                        await getActions().getContacts();
                     } else {
                         console.error("Failed to update contact:", response.statusText);
                     }
@@ -94,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     if (response.ok) {
-                        await getActions().getContacts();  
+                        await getActions().getContacts();
                     } else {
                         console.error("Failed to delete contact:", response.statusText);
                     }
