@@ -11,17 +11,9 @@ export const Home = () => {
         actions.createAgenda();
         actions.getContacts();  
        
-
     }, []);
 
-    const handleDelete = async (contactId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this contact?");
-        if (confirmDelete) {
-            await actions.deleteContact(contactId);
-        }
-    };
-
-    return (
+      return (
         <div className="container">
             <div className="d-flex justify-content-between my-4"></div>
             <div className="row">

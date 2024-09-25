@@ -11,7 +11,6 @@ export const AddContact = ({ closeModal }) => {
   const [address, setAddress] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const newContact = {
       name: name,
       phone: phone,

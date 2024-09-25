@@ -16,8 +16,11 @@ export const ContactCard = ({ contact }) => {
         setShowModal(false);
     };
 
-    const handleDelete = (id) => {
-        actions.deleteContact(id); 
+    const handleDelete = async (contactId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this contact?");
+        if (confirmDelete) {
+            await actions.deleteContact(contactId);
+        }
     };
 
     return (
