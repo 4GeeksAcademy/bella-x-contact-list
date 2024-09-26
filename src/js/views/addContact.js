@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router";
 
-export const AddContact = ({ closeModal }) => {
+export const AddContact = () => {
   const navigate = useNavigate();
   const { actions } = useContext(Context);
   const [name, setName] = useState("");
@@ -11,6 +11,7 @@ export const AddContact = ({ closeModal }) => {
   const [address, setAddress] = useState("");
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     const newContact = {
       name: name,
       phone: phone,
@@ -18,17 +19,13 @@ export const AddContact = ({ closeModal }) => {
       address: address,
     };
     actions.addContact(newContact);
-    closeModal();
     navigate("/");
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 bg-white rounded shadow"
-        style={{ width: "100%" }}
-      >
+    <div className="container" style={{ width: "70%", marginTop: "50px" }}>
+      <h2 className="mb-4">Add New Contact</h2>
+      <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow">
         <div className="form-group mb-3">
           <input
             type="text"
@@ -69,8 +66,16 @@ export const AddContact = ({ closeModal }) => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-success w-100">
+        <button type="submit" className="btn btn-success w-100 mb-2">
           Save
+        </button>
+        <button 
+          type="button" 
+          className="btn btn-secondary w-50 mx-auto d-block" 
+          style={{ fontSize: "0.8rem" }}
+          onClick={() => navigate("/")}
+        >
+          Go back to contacts
         </button>
       </form>
     </div>
@@ -78,4 +83,5 @@ export const AddContact = ({ closeModal }) => {
 };
 
 export default AddContact;
+
 

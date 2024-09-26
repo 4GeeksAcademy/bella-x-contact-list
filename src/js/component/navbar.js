@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { AddContact } from "../views/addContact"; 
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleNavigateToAddContact = () => {
+    navigate("/add-contact");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -14,39 +15,17 @@ export const Navbar = () => {
         <div className="ml-auto">
           <button
             className="btn btn-primary"
-            onClick={handleShowModal}
+            onClick={handleNavigateToAddContact}
           >
             Add New Contact
           </button>
         </div>
       </div>
-
-      {showModal && (
-        <div className="modal show d-block" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Add New Contact</h5>
-                	<button
-                      type="button"
-                      className="close"
-                      aria-label="Close"
-                      onClick={handleCloseModal}
-                      >
-                  	<span aria-hidden="true">&times;</span>
-                	</button>
-                 </div>
-            <div className="modal-body">
-            	<AddContact closeModal={handleCloseModal} />
-            </div>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
 
 export default Navbar;
+
 
 
